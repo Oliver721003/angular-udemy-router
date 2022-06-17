@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-user',
@@ -16,5 +17,11 @@ export class UserComponent implements OnInit {
       id: this.route.snapshot.params['id'],
       name: this.route.snapshot.params['name'],
     };
+
+    this.route.paramMap
+      .pipe(
+        map((params) => ({ id: +params.get('id')!, name: params.get('name')! }))
+      )
+      .subscribe((user) => (this.user = user));
   }
 }
