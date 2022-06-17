@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
 
 import { Server } from '../../model/server';
@@ -14,6 +14,7 @@ export class ServerComponent implements OnInit {
   server!: Server;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private serversService: ServersService
   ) {}
@@ -25,5 +26,9 @@ export class ServerComponent implements OnInit {
     this.route.paramMap
       .pipe(map((params) => +params.get('id')!))
       .subscribe((id) => (this.server = this.serversService.getServer(id)));
+  }
+
+  onEdit(): void {
+    this.router.navigate(['edit'], { relativeTo: this.route });
   }
 }
