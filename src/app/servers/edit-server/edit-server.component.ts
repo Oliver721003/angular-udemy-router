@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
+import { CanComponentDeactivate } from 'src/app/interface/can-component-deactivate.interface';
 
 import { Server } from '../../model/server';
 import { ServersService } from '../servers.service';
@@ -10,7 +11,7 @@ import { ServersService } from '../servers.service';
   templateUrl: './edit-server.component.html',
   styleUrls: ['./edit-server.component.css'],
 })
-export class EditServerComponent implements OnInit {
+export class EditServerComponent implements OnInit, CanComponentDeactivate {
   server!: Server;
   serverName = '';
   serverStatus = '';
@@ -43,5 +44,20 @@ export class EditServerComponent implements OnInit {
     });
     this.changedSaved = true;
     this.router.navigate(['../'], { relativeTo: this.route });
+  }
+
+  canDeactivate(): boolean {
+    if (!this.allowEdit) {
+      return true;
+    }
+    if (
+      (this.serverName !== this.server.name ||
+        this.serverStatus !== this.server.status) &&
+      this.changedSaved
+    ) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }
