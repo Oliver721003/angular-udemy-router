@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { AuthGuard } from './auth.guard';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { HomeComponent } from './home/home.component';
 import { UserComponent } from './users/user/user.component';
@@ -17,6 +18,7 @@ const routes: Routes = [
     path: '',
     loadChildren: () =>
       import('./servers/servers.module').then((m) => m.ServersModule),
+    canLoad: [AuthGuard],
   },
   // { path: 'not-found', component: PageNotFoundComponent },
   {
