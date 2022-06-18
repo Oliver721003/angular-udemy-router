@@ -11,6 +11,7 @@ import { ServerComponent } from './servers/server/server.component';
 import { ServersComponent } from './servers/servers.component';
 import { UserComponent } from './users/user/user.component';
 import { UsersComponent } from './users/users.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, AppRoutingModule],
@@ -23,6 +24,7 @@ import { UsersComponent } from './users/users.component';
     EditServerComponent,
     ServerComponent,
     PageNotFoundComponent,
+    ErrorPageComponent,
   ],
   bootstrap: [AppComponent],
 })

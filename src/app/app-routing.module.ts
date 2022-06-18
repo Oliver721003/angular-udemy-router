@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from './auth.guard';
 import { CanDeactivateGuard } from './can-deactivate.guard';
+import { ErrorPageComponent } from './error-page/error-page.component';
 import { HomeComponent } from './home/home.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { EditServerComponent } from './servers/edit-server/edit-server.component';
 import { ServerComponent } from './servers/server/server.component';
 import { ServersComponent } from './servers/servers.component';
@@ -32,7 +32,12 @@ const routes: Routes = [
       },
     ],
   },
-  { path: 'not-found', component: PageNotFoundComponent },
+  // { path: 'not-found', component: PageNotFoundComponent },
+  {
+    path: 'not-found',
+    component: ErrorPageComponent,
+    data: { message: 'Page not found!' },
+  },
   { path: '**', redirectTo: '/not-found' },
 ];
 
