@@ -15,8 +15,10 @@ export class EditServerComponent implements OnInit {
   serverName = '';
   serverStatus = '';
   allowEdit!: boolean;
+  changedSaved = true;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private serversService: ServersService
   ) {}
@@ -39,5 +41,7 @@ export class EditServerComponent implements OnInit {
       name: this.serverName,
       status: this.serverStatus,
     });
+    this.changedSaved = true;
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 }
